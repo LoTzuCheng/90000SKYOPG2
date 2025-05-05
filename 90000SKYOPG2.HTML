@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九萬畝插爆聯盟系統</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --secondary: #0ea5e9;
+      --danger: #ef4444;
+      --success: #10b981;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --radius: 8px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --transition: all 0.2s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    h2, h3, h4 {
+      color: var(--gray-800);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      border-bottom: 2px solid var(--gray-200);
+      padding-bottom: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      background-color: #0284c7;
+    }
+
+    .btn-danger {
+      background-color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background-color: #dc2626;
+    }
+
+    .btn-gray {
+      background-color: var(--gray-600);
+    }
+
+    .btn-gray:hover {
+      background-color: var(--gray-700);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .stats-card {
+      display: flex;
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    .stats-card-icon {
+      width: 48px;
+      height: 48px;
+      background-color: rgba(79, 70, 229, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      color: var(--primary);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .stats-card-content h4 {
+      margin: 0;
+      color: var(--gray-500);
+      font-size: 0.9rem;
+    }
+
+    .stats-card-content p {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gray-800);
+    }
+
+    .missing-numbers {
+      background-color: rgba(14, 165, 233, 0.1);
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .missing-numbers h4 {
+      color: var(--secondary);
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .missing-numbers span {
+      display: inline-block;
+      background-color: white;
+      border-radius: 4px;
+      padding: 0.25rem 0.5rem;
+      margin: 0.25rem;
+      font-size: 0.9rem;
+      border: 1px solid var(--gray-200);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: var(--shadow-sm);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    table th, table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    table th {
+      background-color: var(--gray-100);
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table tr:hover {
+      background-color: var(--gray-50);
+    }
+
+    .delete-btn {
+      color: var(--danger);
+      cursor: pointer;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+
+    /* 登入頁面 */
+    #loginOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-card {
+      background: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-card h2 {
+      margin-top: 0;
+      border: none;
+      color: var(--gray-800);
+    }
+
+    .login-card input {
+      margin: 1.5rem 0;
+    }
+
+    #errorMsg {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--danger);
+      padding: 0.5rem;
+      border-radius: var(--radius);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /* 管理員面板 */
+    .admin-panel {
+      background-color: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-top: 1.5rem;
+    }
+
+    .admin-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .admin-panel-header h3 {
+      margin: 0;
+    }
+
+    .admin-item {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .admin-item:last-child {
+      border-bottom: none;
+    }
+
+    .admin-item h4 {
+      margin-top: 0;
+    }
+
+    .password-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .toggle-password {
+      width: auto;
+      padding: 0.75rem;
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0.5rem;
+      }
+      
+      header {
+        padding: 1rem 0;
+      }
+      
+      .card {
+        padding: 1rem;
+      }
+      
+      .grid {
+        gap: 0.75rem;
+      }
+    }
+
+    /* 武器使用統計表格樣式 */
+    .weapon-stats-table tbody tr td:first-child {
+      max-width: 200px;
+    }
+
+    .weapon-stats-table tbody tr td:nth-child(2) {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* 武器分類顏色 */
+    .weapon-type-infantry {
+      color: #2563eb;
+    }
+    .weapon-type-ranged {
+      color: #059669;
+    }
+    .weapon-type-cavalry {
+      color: #d97706;
+    }
+    .weapon-type-special {
+      color: #7c3aed;
+    }
+  </style>
+</head>
+<body>
+  <!-- 密碼登入區塊 -->
+  <div id="loginOverlay">
+    <div class="login-card">
+      <h2>九萬畝插爆聯盟系統</h2>
+      <h2>Ninety thousand acres Penetration Alliance</h2>
+      <p>別盟的別想偷偷摸摸</p>
+      <input type="password" id="accessPassword" placeholder="輸入通關密碼">
+      <button onclick="verifyPassword()">連♂️結♂️MY♂️BODY♂️</button>
+      <div id="errorMsg">吃我的屌 Eat my dick</div>
+    </div>
+  </div>
+
+  <!-- 主要內容區塊 -->
+  <div id="mainContent" style="display: none;">
+    <header>
+      <div class="container">
+        <h1>九萬畝插爆聯盟系統</h1>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="grid">
+        <div>
+          <div class="card">
+            <h2>填寫遊戲資料</h2>
+            <form id="dataForm">
+              <div class="form-group">
+                <label for="inputUid">遊戲 UID（數字）：</label>
+                <input type="number" id="inputUid" required>
+              </div>
+
+              <div class="form-group">
+                <label for="inputGameId">遊戲暱稱（Game ID）：</label>
+                <input type="text" id="inputGameId" required>
+              </div>
+
+              <div class="form-group">
+                <label for="inputNumber">分盟編號 (your number)：</label>
+                <select id="inputNumber" required></select>
+              </div>
+
+              <div class="form-group">
+                <label for="inputWeapon">一專兵種（Exclusive Weapons）：</label>
+                <select id="inputWeapon" required>
+                  <option value="">--請選擇--</option>
+                  <option class="weapon-type-infantry">我是地鼠號 I'm excavator</option>
+                  <option class="weapon-type-infantry">重盾Heavy shield</option>
+                  <option class="weapon-type-infantry">槍盾Spear shield</option>
+                  <option class="weapon-type-infantry">劍盾SNS</option>
+                  <option class="weapon-type-infantry">錘盾Hammer shield</option>
+                  <option class="weapon-type-infantry">刀盾saber&shield Soldier</option>
+                  <option class="weapon-type-infantry">長槍 Longsperman</option>
+                  <option class="weapon-type-infantry">長矛lancer</option>
+                  <option class="weapon-type-infantry">長戈Dagger-axe Soldier</option>
+                  <option class="weapon-type-infantry">陌刀 Modao</option>
+                  <option class="weapon-type-infantry">長劍 Long Swordsman</option>
+                  <option class="weapon-type-infantry">雙槍 Twin spear</option>
+                  <option class="weapon-type-ranged">長弓 Long bow</option>
+                  <option class="weapon-type-ranged">連弩 Crossbow man</option>
+                  <option class="weapon-type-ranged">毒弓 Toxibowman</option>
+                  <option class="weapon-type-ranged">獵人 Hunter</option>
+                  <option class="weapon-type-ranged">重弩 improved crossbowman</option>
+                  <option class="weapon-type-ranged">火弓 Fire Bowman</option>
+                  <option class="weapon-type-cavalry">劍騎 Sword cav</option>
+                  <option class="weapon-type-cavalry">槍騎 Spear Cavalry</option>
+                  <option class="weapon-type-cavalry">大刀騎 Broadsword cav</option>
+                  <option class="weapon-type-cavalry">重騎 Heavy cav</option>
+                  <option class="weapon-type-cavalry">弓騎 Bow cav</option>
+                  <option class="weapon-type-cavalry">斧騎Axe cav</option>
+                  <option class="weapon-type-special">没想法 None sense what u want to play</option>
+
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="inputDecision">必選中想玩兵種嗎?Will you definitely choose it?：</label>
+                <select id="inputDecision" required>
+                  <option value="">--請選擇--</option>
+                  <option>YES</option>
+                  <option>NO</option>
+                </select>
+              </div>
+
+              <button type="submit">提交資料</button>
+            </form>
+          </div>
+        </div>
+
+        <div>
+          <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+            <div class="stats-card">
+              <div class="stats-card-icon">A</div>
+              <div class="stats-card-content">
+                <h4>A盟已提交</h4>
+                <p id="countA">0</p>
+              </div>
+            </div>
+            <div class="stats-card">
+              <div class="stats-card-icon">B</div>
+              <div class="stats-card-content">
+                <h4>B盟已提交</h4>
+                <p id="countB">0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="missing-numbers">
+            <h4>A盟誰還沒寫</h4>
+            <div id="missingA"></div>
+          </div>
+
+          <div class="missing-numbers">
+            <h4>B盟誰還沒寫</h4>
+            <div id="missingB"></div>
+          </div>
+          
+          <div style="text-align: right; margin-top: 1rem;">
+            <button id="adminBtn" class="btn-gray">秘♂️密♂️基♂️地♂️</button>
+          </div>
+        </div>
+      </div>
+
+     <!-- 將原始代碼中的編號清單部分替換為以下代碼 -->
+
+<h2 style="text-align: center; margin-bottom: 1.5rem;">詳細清單</h2>
+<div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
+  <div>
+    <h3 style="text-align: center; border-bottom: 2px solid var(--gray-200); padding-bottom: 0.5rem;">A 詳細清單</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>編號</th><th>UID</th><th>暱稱</th><th>武器</th><th>必選</th><th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="listA"></tbody>
+    </table>
+  </div>
+  <div>
+    <h3 style="text-align: center; border-bottom: 2px solid var(--gray-200); padding-bottom: 0.5rem;">B 編號清單</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>編號</th><th>UID</th><th>暱稱</th><th>武器</th><th>必選</th><th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="listB"></tbody>
+    </table>
+  </div>
+</div>
+
+      <!-- 改進的武器使用統計部分 -->
+<h2>武器使用統計</h2>
+<div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+  <div>
+    <h3 style="text-align: center; border-bottom: 2px solid var(--gray-200); padding-bottom: 0.5rem; margin-bottom: 1rem;">A盟統計</h3>
+    <table id="tableA" class="weapon-stats-table">
+      <thead>
+        <tr>
+          <th>武器名稱</th>
+          <th>使用次數</th>
+          <th>可能鬼轉玩家</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div>
+    <h3 style="text-align: center; border-bottom: 2px solid var(--gray-200); padding-bottom: 0.5rem; margin-bottom: 1rem;">B盟統計</h3>
+    <table id="tableB" class="weapon-stats-table">
+      <thead>
+        <tr>
+          <th>武器名稱</th>
+          <th>使用次數</th>
+          <th>可能鬼轉玩家</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 添加一些額外的樣式 -->
+<style>
+  .weapon-stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .weapon-stats-table th, .weapon-stats-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .weapon-stats-table th {
+    background-color: var(--gray-100);
+    font-weight: 600;
+    color: var(--gray-700);
+  }
+
+  .weapon-stats-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .weapon-stats-table tbody tr:hover {
+    background-color: var(--gray-50);
+  }
+
+  .weapon-stats-table tbody tr td:first-child {
+    max-width: 200px;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .weapon-stats-table tbody tr td:nth-child(2) {
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+  }
+  
+  .weapon-stats-table tbody tr td:nth-child(3) {
+    font-size: 0.95rem;
+    color: var(--gray-700);
+  }
+</style>
+
+      <!-- 管理員後台 -->
+      <div id="adminPanel" class="admin-panel" style="display: none;">
+        <div class="admin-panel-header">
+          <h3>管理員後台</h3>
+          <button id="closeAdminPanel" class="btn-gray">關閉</button>
+        </div>
+        
+        <div class="admin-item">
+          <h4>重設全部資料</h4>
+          <div class="password-container">
+            <input type="password" id="resetPassword" placeholder="輸入密碼">
+            <button class="toggle-password btn-secondary" data-for="resetPassword">顯示</button>
+          </div>
+          <button id="resetBtn" class="btn-danger">清空所有資料</button>
+        </div>
+        
+        <div class="admin-item">
+          <h4>設定進入密碼</h4>
+          <p>目前進入密碼: <span id="currentAccessPwd">0000</span></p>
+          <div class="password-container">
+            <input type="password" id="newAccessPassword" placeholder="輸入新密碼">
+            <button class="toggle-password btn-secondary" data-for="newAccessPassword">顯示</button>
+          </div>
+          <div class="password-container">
+            <input type="password" id="adminPassword" placeholder="輸入管理員密碼">
+            <button class="toggle-password btn-secondary" data-for="adminPassword">顯示</button>
+          </div>
+          <button id="changeAccessPwdBtn">更新進入密碼</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.6.1/firebase-database-compat.js"></script>
+
+  <script>
+    // Firebase配置
+    const firebaseConfig = {
+      apiKey: "AIzaSyDYJPjYmnK5l5QF4qo_rfxHObThS6ZC60w",
+      authDomain: "project-1526243836019355526.firebaseapp.com",
+      databaseURL: "https://project-1526243836019355526-default-rtdb.firebaseio.com",
+      projectId: "project-1526243836019355526",
+      storageBucket: "project-1526243836019355526.appspot.com",
+      messagingSenderId: "960921070729",
+      appId: "1:960921070729:web:888b690e6a2ac04bdeaa58"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const submissionsRef = database.ref('submissions');
+    const settingsRef = database.ref('settings');
+    const numberSelect = document.getElementById('inputNumber');
+    
+    // 管理員密碼
+    const ADMIN_PASSWORD = '8787OPGG';
+    
+    // 默認進入密碼
+    let accessPassword = '0000';
+    
+    // 讀取系統設定
+    settingsRef.child('accessPassword').once('value', snapshot => {
+      if (snapshot.exists()) {
+        accessPassword = snapshot.val();
+        document.getElementById('currentAccessPwd').textContent = accessPassword;
+      } else {
+        // 如果沒有設定，建立默認密碼
+        settingsRef.child('accessPassword').set(accessPassword);
+      }
+    });
+
+    // 密碼驗證功能
+    function verifyPassword() {
+      const pwd = document.getElementById('accessPassword').value;
+      const overlay = document.getElementById('loginOverlay');
+      const content = document.getElementById('mainContent');
+      const error = document.getElementById('errorMsg');
+
+      if (pwd === accessPassword) {
+        overlay.style.display = 'none';
+        content.style.display = 'block';
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    // 生成編號選項
+    for (let i = 1; i <= 40; i++) {
+      ["A", "B"].forEach(prefix => {
+        const opt = document.createElement('option');
+        opt.value = opt.text = prefix + i.toString().padStart(2, '0');
+        numberSelect.appendChild(opt);
+      });
+    }
+
+    // 表單提交處理
+    document.getElementById('dataForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const uid = document.getElementById('inputUid').value;
+      const gameId = document.getElementById('inputGameId').value;
+      const number = document.getElementById('inputNumber').value;
+      const weapon = document.getElementById('inputWeapon').value;
+      const decision = document.getElementById('inputDecision').value;
+
+      const newRef = submissionsRef.push();
+      newRef.set({ uid, gameId, number, weapon, decision })
+        .then(() => {
+          alert('資料提交成功！');
+          document.getElementById('dataForm').reset();
+        })
+        .catch(error => {
+          alert('提交失敗: ' + error.message);
+        });
+    });
+
+    // 資料監聽與更新
+    submissionsRef.on('value', (snapshot) => {
+      let data = [];
+      snapshot.forEach(child => {
+        data.push({ key: child.key, ...child.val() });
+      });
+
+      const A = data.filter(d => d.number.startsWith('A'));
+      const B = data.filter(d => d.number.startsWith('B'));
+
+      document.getElementById('countA').textContent = A.length;
+      document.getElementById('countB').textContent = B.length;
+
+      updateNumberOptions(data);
+      renderNumberTables(A, B);
+      updateWeaponCharts(data);
+      updateMissingNumbers(data);
+    });
+
+    // 監聽設定變更
+    settingsRef.on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        const settings = snapshot.val();
+        if (settings.accessPassword) {
+          accessPassword = settings.accessPassword;
+          document.getElementById('currentAccessPwd').textContent = accessPassword;
+        }
+      }
+    });
+
+    // 更新可選編號
+    function updateNumberOptions(data) {
+      const selected = new Set(data.map(d => d.number));
+      Array.from(numberSelect.options).forEach(opt => {
+        opt.disabled = selected.has(opt.value);
+      });
+    }
+
+    // 渲染編號清單表格
+    function renderNumberTables(A, B) {
+      const render = (listId, group) => {
+        const tbody = document.getElementById(listId);
+        tbody.innerHTML = '';
+        group.sort((a, b) => a.number.localeCompare(b.number)).forEach(d => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${d.number}</td><td>${d.uid}</td><td>${d.gameId}</td><td>${d.weapon}</td><td>${d.decision}</td>
+            <td><span class="delete-btn" onclick="deleteEntry('${d.key}')">刪除</span></td>
+          `;
+          tbody.appendChild(row);
+        });
+      };
+      render('listA', A);
+      render('listB', B);
+    }
+
+    // 更新武器使用統計
+    function updateWeaponCharts(data) {
+      const weaponTypeMap = {
+  "我是地鼠號 I'm excavator": "infantry",
+  "重盾Heavy shield": "infantry",
+  "槍盾Spear shield": "infantry",
+  "劍盾SNS": "infantry",
+  "錘盾Hammer shield": "infantry",
+  "刀盾saber&shield Soldier": "infantry",
+  "長槍 Longsperman": "infantry",
+  "長矛lancer": "infantry",
+  "長戈Dagger-axe Soldier": "infantry",
+  "陌刀 Modao": "infantry",
+  "長劍 Long Swordsman": "infantry",
+  "雙槍 Twin spear": "infantry",
+  "長弓 Long bow": "ranged",
+  "連弩 Crossbow man": "ranged",
+  "毒弓 Toxibowman": "ranged",
+  "獵人 Hunter": "ranged",
+  "重弩 improved crossbowman": "ranged",   // ✅ 加上這一項
+  "火弓 Fire Bowman": "ranged",
+  "劍騎 Sword cav": "cavalry",
+  "槍騎 Spear Cavalry": "cavalry",
+  "大刀騎 Broadsword cav": "cavalry",
+  "重騎 Heavy cav": "cavalry",
+  "弓騎 Bow cav": "cavalry",
+  "斧騎Axe cav": "cavalry",
+  "没想法 None sense what u want to play": "special"
+};
+
+      const analyzeWeapons = (group) => {
+        const map = {};
+        allWeapons.forEach(w => {
+          map[w] = { 
+            total: 0, 
+            maySwitch: [] // 儲存所有選擇 NO 的玩家暱稱
+          };
+        });
+        
+        group.forEach(d => {
+          if (map[d.weapon]) {
+            map[d.weapon].total++;
+            if (d.decision === 'NO') {
+              map[d.weapon].maySwitch.push(d.gameId);
+            }
+          }
+        });
+        return map;
+      };
+
+      const renderTable = (tableId, weaponData) => {
+        const tbody = document.querySelector(`#${tableId} tbody`);
+        tbody.innerHTML = '';
+        Object.entries(weaponData).sort((a, b) => b[1].total - a[1].total).forEach(([weapon, data]) => {
+          if (data.total === 0) return; // 不顯示計數為0的武器
+          
+          // 添加武器類型的CSS類
+          const type = weaponTypeMap[weapon] || 'infantry';
+          const weaponClass = 'weapon-type-' + type;
+
+          
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="${weaponClass}">${weapon}</td>
+            <td>${data.total}</td>
+            <td>${data.maySwitch.join(', ') || '無'}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      };
+
+      const groupA = data.filter(d => d.number.startsWith('A'));
+      const groupB = data.filter(d => d.number.startsWith('B'));
+
+      renderTable('tableA', analyzeWeapons(groupA));
+      renderTable('tableB', analyzeWeapons(groupB));
+    }
+
+    // 更新缺少的編號列表
+    function updateMissingNumbers(data) {
+      const used = new Set(data.map(d => d.number));
+      const missingA = [], missingB = [];
+
+      for (let i = 1; i <= 40; i++) {
+        let a = 'A' + i.toString().padStart(2, '0');
+        let b = 'B' + i.toString().padStart(2, '0');
+        if (!used.has(a)) missingA.push(a);
+        if (!used.has(b)) missingB.push(b);
+      }
+
+      const renderMissing = (elementId, missingArray) => {
+        const container = document.getElementById(elementId);
+        container.innerHTML = '';
+        if (missingArray.length === 0) {
+          container.innerHTML = '<span>全部已填寫完成</span>';
+          return;
+        }
+        
+        missingArray.forEach(num => {
+          const span = document.createElement('span');
+          span.textContent = num;
+          container.appendChild(span);
+        });
+      };
+
+      renderMissing('missingA', missingA);
+      renderMissing('missingB', missingB);
+    }
+
+    // 刪除項目功能
+    function deleteEntry(key) {
+      const pwd = prompt('請輸入密碼以刪除：');
+      if (pwd === ADMIN_PASSWORD) {
+        if (confirm('確定刪除此筆資料？')) {
+          firebase.database().ref('submissions/' + key).remove()
+            .then(() => {
+              alert('資料已成功刪除');
+            })
+            .catch(error => {
+              alert('刪除失敗: ' + error.message);
+            });
+        }
+      } else {
+        alert('密碼錯誤！');
+      }
+    }
+
+    // 重設所有資料功能
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      const inputPass = document.getElementById('resetPassword').value;
+      if (inputPass === ADMIN_PASSWORD) {
+        if (confirm('確定要清空所有資料嗎？此操作無法復原！')) {
+          submissionsRef.remove()
+            .then(() => {
+              alert('資料已全部清空');
+              document.getElementById('resetPassword').value = '';
+            })
+            .catch(error => {
+              alert('清空失敗: ' + error.message);
+            });
+        }
+      } else {
+        alert('密碼錯誤');
+      }
+    });
+
+    // 管理員後台顯示控制
+    document.getElementById('adminBtn').addEventListener('click', () => {
+      const pwd = prompt('請輸入管理員密碼：');
+      if (pwd === ADMIN_PASSWORD) {
+        const adminPanel = document.getElementById('adminPanel');
+        adminPanel.style.display = 'block';
+      } else {
+        alert('密碼錯誤！');
+      }
+    });
+    
+    // 關閉管理員面板
+    document.getElementById('closeAdminPanel').addEventListener('click', () => {
+      document.getElementById('adminPanel').style.display = 'none';
+    });
+    
+    // 更新進入密碼功能
+    document.getElementById('changeAccessPwdBtn').addEventListener('click', () => {
+      const newPwd = document.getElementById('newAccessPassword').value;
+      const adminPwd = document.getElementById('adminPassword').value;
+      
+      if (!newPwd) {
+        alert('請輸入新密碼');
+        return;
+      }
+      
+      if (adminPwd !== ADMIN_PASSWORD) {
+        alert('管理員密碼錯誤');
+        return;
+      }
+      
+      settingsRef.child('accessPassword').set(newPwd)
+        .then(() => {
+          alert('進入密碼已更新');
+          document.getElementById('newAccessPassword').value = '';
+          document.getElementById('adminPassword').value = '';
+          document.getElementById('currentAccessPwd').textContent = newPwd;
+        })
+        .catch(error => {
+          alert('更新失敗: ' + error.message);
+        });
+    });
+    
+    // 密碼顯示/隱藏切換功能
+    window.addEventListener('DOMContentLoaded', () => {
+      // 設定所有密碼輸入欄位的顯示/隱藏切換
+      document.querySelectorAll('.toggle-password').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-for');
+          const pwdField = document.getElementById(targetId);
+          
+          if (pwdField.type === 'password') {
+            pwdField.type = 'text';
+            this.textContent = '隱藏';
+          } else {
+            pwdField.type = 'password';
+            this.textContent = '顯示';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
